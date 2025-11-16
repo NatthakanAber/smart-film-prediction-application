@@ -69,9 +69,12 @@ contact = {
 }
 
 # Load the class encoder (lable encoding model trained on the dataset in the pre-processing step)
-label_enc = load(open('models/class_encoder.pkl', 'rb'))
-class_names = list(label_enc.classes_)
-#st.write(class_names)
+#label_enc = load(open('models/class_encoder.pkl', 'rb'))
+class_names = ["Not spoiled", "Spoiled" ] #list(label_enc.classes_)
+# Load the scaler (normalisation model trained on the dataset in the pre-processing step)
+enc = load(open('models/onehot_encoder.pkl', 'rb'))
+# Load the scaler (normalisation model trained on the dataset in the pre-processing step)
+scaler = load(open('models/scaler.pkl', 'rb'))
 # load model (SVC)
 model = load(open('models/classification_model.pkl', 'rb')) # SVC
 
@@ -140,8 +143,7 @@ if submit_button:
         # --------
         # One hot encoding for 'Abbreviation of source', 'Abbreviation of matrix', 'Abbreviation of contact'
         # Transform nominal to numerical features
-        # Load the scaler (normalisation model trained on the dataset in the pre-processing step)
-        enc = load(open('models/onehot_encoder.pkl', 'rb'))
+
 
         # Define a list of nominal features
         nomial_features = ['Abbreviation of source', 'Abbreviation of matrix',
@@ -170,8 +172,6 @@ if submit_button:
         # --------
         # Perform normalisation
         # Normalisation
-        # Load the scaler (normalisation model trained on the dataset in the pre-processing step)
-        scaler = load(open('models/scaler.pkl', 'rb'))
 
         # Normalise the X_new dataframe using the normalisation model
         X_scaled = scaler.transform(new_X)

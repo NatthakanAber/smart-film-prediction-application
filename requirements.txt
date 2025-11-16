@@ -2,6 +2,6 @@ streamlit
 pillow
 numpy
 pandas
-sklearn
+scikit-learn
 PIL
 pickle
